@@ -1,0 +1,10 @@
+E:\mywork\Com.Practice\Com.Practice.DesignPattern\bin\Debug\Com.Practice.DesignPattern.exe
+E:\mywork\Com.Practice\Com.Practice.DesignPattern\bin\Debug\Com.Practice.DesignPattern.pdb
+E:\mywork\Com.Practice\Com.Practice.DesignPattern\obj\Debug\Com.Practice.DesignPattern.csprojResolveAssemblyReference.cache
+E:\mywork\Com.Practice\Com.Practice.DesignPattern\obj\Debug\Com.Practice.DesignPattern.exe
+E:\mywork\Com.Practice\Com.Practice.DesignPattern\obj\Debug\Com.Practice.DesignPattern.pdb
+D:\visualstudio2012_Projects\Com.Practice\Com.Practice.DesignPattern\obj\Debug\Com.Practice.DesignPattern.exe
+D:\visualstudio2012_Projects\Com.Practice\Com.Practice.DesignPattern\obj\Debug\Com.Practice.DesignPattern.pdb
+D:\visualstudio2012_Projects\Com.Practice\Com.Practice.DesignPattern\bin\Debug\Com.Practice.DesignPattern.exe
+D:\visualstudio2012_Projects\Com.Practice\Com.Practice.DesignPattern\bin\Debug\Com.Practice.DesignPattern.pdb
+D:\visualstudio2012_Projects\Com.Practice\Com.Practice.DesignPattern\obj\Debug\Com.Practice.DesignPattern.csprojResolveAssemblyReference.cache

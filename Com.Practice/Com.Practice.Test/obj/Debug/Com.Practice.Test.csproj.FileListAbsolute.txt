@@ -1,0 +1,10 @@
+E:\mywork\Com.Practice\Com.Practice.Test\bin\Debug\Com.Practice.Test.exe
+E:\mywork\Com.Practice\Com.Practice.Test\bin\Debug\Com.Practice.Test.pdb
+E:\mywork\Com.Practice\Com.Practice.Test\obj\Debug\Com.Practice.Test.csprojResolveAssemblyReference.cache
+E:\mywork\Com.Practice\Com.Practice.Test\obj\Debug\Com.Practice.Test.exe
+E:\mywork\Com.Practice\Com.Practice.Test\obj\Debug\Com.Practice.Test.pdb
+D:\visualstudio2012_Projects\Com.Practice\Com.Practice.Test\obj\Debug\Com.Practice.Test.exe
+D:\visualstudio2012_Projects\Com.Practice\Com.Practice.Test\obj\Debug\Com.Practice.Test.pdb
+D:\visualstudio2012_Projects\Com.Practice\Com.Practice.Test\bin\Debug\Com.Practice.Test.exe
+D:\visualstudio2012_Projects\Com.Practice\Com.Practice.Test\bin\Debug\Com.Practice.Test.pdb
+D:\visualstudio2012_Projects\Com.Practice\Com.Practice.Test\obj\Debug\Com.Practice.Test.csprojResolveAssemblyReference.cache

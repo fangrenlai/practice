@@ -1,0 +1,205 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <!-- CSS files~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+    <!-- Bootstrap styles -->
+    <link href="~/Plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Plugins/bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet" />
+    <link href="~/Plugins/bootstrap/css/bootstrap-image-gallery.min.css" rel="stylesheet" />
+
+    <link href="~/Plugins/jqueryfileupload/css/jquery.fileupload-ui.css" rel="stylesheet" />
+    <link href="~/Plugins/jqueryfileupload/css/jquery.fileupload.css" rel="stylesheet" />
+    <!-- jquery主文件 ,借用easyui内置jquery文件，mini版本 -->
+    <script src="~/Plugins/easyui/jquery-easyui-1.3.6/jquery.min.js" type="text/javascript"></script>
+    <script src="~/Plugins/jqueryfileupload/js/jquery-ui.min.js" type="text/javascript"></script>
+
+    <script src="~/Plugins/jqueryfileupload/tmpl.min.js" type="text/javascript"></script>
+    <script src="~/Plugins/jqueryfileupload/jsloader-image/load-image.min.js" type="text/javascript"></script>
+    <!-- The Canvas to Blob plugin is included for image resizing functionality -->
+    <script src="~/Plugins/jqueryfileupload/canvas-to-blob.min.js" type="text/javascript"></script>
+
+    <script src="~/Plugins/jqueryfileupload/jquery.iframe-transport.js" type="text/javascript"></script>
+    <script src="~/Plugins/jqueryfileupload/jquery.fileupload.js" type="text/javascript"></script>
+    <script src="~/Plugins/jqueryfileupload/jquery.fileupload-ip.js" type="text/javascript"></script>
+    <script src="~/Plugins/jqueryfileupload/jquery.fileupload-ui.js" type="text/javascript"></script>
+
+    <script src="~/Plugins/jqueryfileupload/js/locale.js" type="text/javascript"></script>
+
+    <script src="~/Scripts/Upload/formUpload.js" type="text/javascript"></script>
+
+</head>
+<body>
+    <div class="container">
+        <form id="dataForm" action="#" class="form-horizontal">
+            <fieldset>
+                <legend>带表单上传文件示例</legend>
+            </fieldset>
+            <div class="control-group">
+                <label class="control-label" for="name1">字段1</label>
+                <div class="controls">
+                    <input type="text" id="name1" placeholder="字段1">
+                </div>
+            </div>
+
+            <div class="control-group">
+                <label class="control-label" for="inputEmail">字段2</label>
+                <div class="controls">
+                    <input type="text" id="name2" placeholder="字段2">
+                </div>
+            </div>
+            <div class="control-group">
+                <div class="controls">
+                    <button type="reset" class="btn btn-warning cancel" id="dataResetBtn">
+                        <i class="icon-ban-circle icon-white"></i>
+                        <span>重置数据</span>
+                    </button>
+                    <button type="button" class="btn btn-primary start" id="dataSubmitBtn">
+                        <i class="icon-upload icon-white"></i>
+                        <span>提交数据</span>
+                    </button>
+                </div>
+            </div>
+        </form>
+        <form class="form-horizontal" style="display:none;"
+            id="fileupload" action="/Handler/Upload/FormUploadHandler.ashx" method="POST" enctype="multipart/form-data">
+
+            <div class="row fileupload-buttonbar">
+                <div class="span7">
+
+                    <span class="btn btn-success fileinput-button">
+                        <i class="icon-plus icon-white"></i>
+                        <span>添加文件...</span>
+                        <input type="file" name="files[]" multiple>
+                    </span>
+
+                    <button type="reset" class="btn btn-warning cancel">
+                        <i class="icon-ban-circle icon-white"></i>
+                        <span>取消已选择文件</span>
+                    </button>
+                    <button type="button" class="btn btn-danger delete">
+                        <i class="icon-trash icon-white"></i>
+                        <span>删除已上传文件</span>
+                    </button>
+                    <input type="checkbox" class="toggle">
+
+                    <button type="submit" class="btn btn-primary start">
+                        <i class="icon-upload icon-white"></i>
+                        <span>全部上传</span>
+                    </button>
+                </div>
+                <div class="span5">
+
+                    <div class="progress progress-success progress-striped active fade">
+                        <div class="bar" style="width: 0%;"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="fileupload-loading"></div>
+            <br>
+            <table class="table table-striped">
+                <tbody class="files" data-toggle="modal-gallery" data-target="#modal-gallery"></tbody>
+            </table>
+        </form>
+
+
+        <div id="modal-gallery" class="modal modal-gallery hide fade">
+            <div class="modal-header">
+                <a class="close" data-dismiss="modal">&times;</a>
+                <h3 class="modal-title"></h3>
+            </div>
+            <div class="modal-body">
+                <div class="modal-image"></div>
+            </div>
+            <div class="modal-footer">
+                <a class="btn btn-primary modal-next">
+                    <span>Next</span>
+                    <i class="icon-arrow-right icon-white"></i>
+                </a>
+                <a class="btn btn-info modal-prev">
+                    <i class="icon-arrow-left icon-white"></i>
+                    <span>Previous</span>
+                </a>
+                <a class="btn btn-success modal-play modal-slideshow" data-slideshow="5000">
+                    <i class="icon-play icon-white"></i>
+                    <span>Slideshow</span>
+                </a>
+                <a class="btn modal-download" target="_blank">
+                    <i class="icon-download"></i>
+                    <span>Download</span>
+                </a>
+            </div>
+        </div>
+
+        <!-- 待上传文件列表 -->
+        <script id="template-upload" type="text/x-tmpl">
+            {% for (var i=0, file; file=o.files[i]; i++) { %}
+                <tr class="template-upload fade">
+                    <td class="preview"><span class="fade"></span></td>
+                    <td class="name"><span>{%=file.name%}</span></td>
+                    <td class="size"><span>{%=o.formatFileSize(file.size)%}</span></td>
+                    {% if (file.error) { %}
+                        <td class="error" colspan="2"><span class="label label-important">{%=locale.fileupload.error%}</span> {%=locale.fileupload.errors[file.error] || file.error%}</td>
+                    {% } else if (o.files.valid && !i) { %}
+                        <td>
+                            <div class="progress progress-success progress-striped active"><div class="bar" style="width:0%;"></div></div>
+                        </td>
+                        <td class="start">
+                            {% if (!o.options.autoUpload) { %}
+                            <button class="btn btn-primary">
+                                <i class="icon-upload icon-white"></i>
+                                <span>{%=locale.fileupload.start%}</span>
+                            </button>
+                            {% } %}
+                        </td>
+                    {% } else { %}
+                        <td colspan="2"></td>
+                    {% } %}
+                    <td class="cancel">{% if (!i) { %}
+                        <button class="btn btn-warning">
+                            <i class="icon-ban-circle icon-white"></i>
+                            <span>{%=locale.fileupload.cancel%}</span>
+                        </button>
+                    {% } %}</td>
+                </tr>
+            {% } %}
+        </script>
+
+        @*已上传的文件展示*@
+        <script id="template-download" type="text/x-tmpl">
+            {% for (var i=0, file; file=o.files[i]; i++) { %}
+                <tr class="template-download fade">
+                    {% if (file.error) { %}
+                        <td></td>
+                        <td class="name"><span>{%=file.name%}</span></td>
+                        <td class="size"><span>{%=o.formatFileSize(file.size)%}</span></td>
+                        <td class="error" colspan="2"><span class="label label-important">{%=locale.fileupload.error%}</span> {%=locale.fileupload.errors[file.error] || file.error%}</td>
+                    {% } else { %}
+                        <td class="preview">{% if (file.thumbnail_url) { %}
+                            <a href="{%=file.url%}" title="{%=file.name%}" rel="gallery" download="{%=file.name%}"><img style="width:80px;height:65px;" src="{%=file.thumbnail_url%}"></a>
+                        {% } %}</td>
+                        <td class="name">
+                            <a href="{%=file.url%}" title="{%=file.name%}" rel="{%=file.thumbnail_url&&'gallery'%}" download="{%=file.name%}">{%=file.name%}</a>
+                        </td>
+                        <td class="size"><span>{%=o.formatFileSize(file.size)%}</span></td>
+                        <td colspan="2"></td>
+                    {% } %}
+                    <td class="delete">
+                        <button class="btn btn-danger" data-type="{%=file.delete_type%}" data-url="{%=file.delete_url%}">
+                            <i class="icon-trash icon-white"></i>
+                            <span>{%=locale.fileupload.destroy%}</span>
+                        </button>
+                        <input type="checkbox" name="delete" value="1">
+                    </td>
+                </tr>
+            {% } %}
+        </script>
+
+        <input type="button" class="btn btn-primary" id="getUploadedFiles" value="获取已上传的文件信息" />
+        <div id="uploadedFilesDiv">
+            <table id="uploadedFilesTable"></table>
+        </div>
+    </div>
+</body>
+</html>

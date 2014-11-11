@@ -1,0 +1,9 @@
+E:\mywork\Com.Practice\Com.Practice.Model\bin\Debug\Com.Practice.Model.dll
+E:\mywork\Com.Practice\Com.Practice.Model\bin\Debug\Com.Practice.Model.pdb
+E:\mywork\Com.Practice\Com.Practice.Model\obj\Debug\Com.Practice.Model.dll
+E:\mywork\Com.Practice\Com.Practice.Model\obj\Debug\Com.Practice.Model.pdb
+D:\visualstudio2012_Projects\Com.Practice\Com.Practice.Model\bin\Debug\Com.Practice.Model.dll
+D:\visualstudio2012_Projects\Com.Practice\Com.Practice.Model\bin\Debug\Com.Practice.Model.pdb
+D:\visualstudio2012_Projects\Com.Practice\Com.Practice.Model\obj\Debug\Com.Practice.Model.csprojResolveAssemblyReference.cache
+D:\visualstudio2012_Projects\Com.Practice\Com.Practice.Model\obj\Debug\Com.Practice.Model.dll
+D:\visualstudio2012_Projects\Com.Practice\Com.Practice.Model\obj\Debug\Com.Practice.Model.pdb

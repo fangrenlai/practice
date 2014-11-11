@@ -1,0 +1,10 @@
+D:\visualstudio2012_Projects\MVCDemo\Common\obj\Debug\Common.csprojResolveAssemblyReference.cache
+E:\mywork\Com.Practice\Common\obj\Debug\Common.csprojResolveAssemblyReference.cache
+E:\mywork\Com.Practice\Common\bin\Debug\Common.dll
+E:\mywork\Com.Practice\Common\bin\Debug\Common.pdb
+E:\mywork\Com.Practice\Common\bin\Debug\COM.Excel.dll
+E:\mywork\Com.Practice\Common\bin\Debug\Excel.dll
+E:\mywork\Com.Practice\Common\bin\Debug\OpenSmtp.dll
+E:\mywork\Com.Practice\Common\bin\Debug\OWC10Chart.dll
+E:\mywork\Com.Practice\Common\obj\Debug\Common.dll
+E:\mywork\Com.Practice\Common\obj\Debug\Common.pdb

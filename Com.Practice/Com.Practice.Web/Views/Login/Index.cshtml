@@ -1,0 +1,12 @@
+﻿@{
+    ViewBag.Title = "用户登录";
+    <script src="~/Plugins/jquery/jquery-1.8.2.min.js" type="text/javascript"></script>
+    <script src="~/Scripts/Login/index.js" type="text/javascript"></script>
+}
+
+<h2>用户登录</h2>
+
+<label>帐号：</label><input value="admin" id="loginName" type="text" /><label id="loginNameInfo"></label><br /><br />
+<label>密码：</label><input value="admin" id="pwd" type="password" /><label id="pwdInfo"></label><br /><br />
+<input id="resetBtn" type="button" value="重置" onclick="reset()"/>&nbsp&nbsp;&nbsp;&nbsp;
+<input id="loginBtn" type="button" value="登录" onclick="login()"/>

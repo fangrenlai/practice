@@ -1,0 +1,8 @@
+D:\visualstudio2012_Projects\MVCDemo\DBUtility\obj\Debug\DBUtility.csprojResolveAssemblyReference.cache
+E:\mywork\Com.Practice\DBUtility\bin\Debug\DBUtility.dll
+E:\mywork\Com.Practice\DBUtility\bin\Debug\DBUtility.pdb
+E:\mywork\Com.Practice\DBUtility\bin\Debug\IBatisNet.Common.dll
+E:\mywork\Com.Practice\DBUtility\bin\Debug\IBatisNet.DataMapper.dll
+E:\mywork\Com.Practice\DBUtility\obj\Debug\DBUtility.csprojResolveAssemblyReference.cache
+E:\mywork\Com.Practice\DBUtility\obj\Debug\DBUtility.dll
+E:\mywork\Com.Practice\DBUtility\obj\Debug\DBUtility.pdb
