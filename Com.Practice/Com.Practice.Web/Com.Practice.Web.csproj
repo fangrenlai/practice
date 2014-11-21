@@ -200,6 +200,7 @@
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\BookController.cs" />
     <Compile Include="Controllers\MenuController.cs" />
+    <Compile Include="Controllers\RoleController.cs" />
     <Compile Include="Controllers\UploadController.cs" />
     <Compile Include="Controllers\UploadifyController.cs" />
     <Compile Include="Controllers\UserController.cs" />
@@ -276,6 +277,7 @@
     <Content Include="Content\themes\base\minified\jquery.ui.slider.min.css" />
     <Content Include="Content\themes\base\minified\jquery.ui.tabs.min.css" />
     <Content Include="Content\themes\base\minified\jquery.ui.theme.min.css" />
+    <Content Include="CSS\dataGrid.css" />
     <Content Include="CSS\Function\index.css" />
     <Content Include="CSS\Home\index.css" />
     <Content Include="CSS\Login\index.css" />
@@ -654,6 +656,8 @@
     <Content Include="Plugins\uploadify3.2\uploadify.swf" />
     <Content Include="Scripts\Function\index.js" />
     <Content Include="Scripts\Login\index.js" />
+    <Content Include="Scripts\Menu\index.js" />
+    <Content Include="Scripts\Role\index.js" />
     <Content Include="Scripts\Template\indexTop.js" />
     <Content Include="Scripts\Upload\formUpload.js" />
     <Content Include="Scripts\Home\index.js" />
@@ -727,6 +731,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Function\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Role\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Menu\Index.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

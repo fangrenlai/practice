@@ -9,6 +9,43 @@ namespace Com.Practice.Test
     public class FilesUtilsTest
     {
 
+        /// <summary>
+        /// 临时方法，批量将之前的客户代码命名的图片改成id命名
+        /// </summary>
+        /// <param name="cstCode"></param>
+        /// <param name="cstId"></param>
+        /// <returns></returns>
+        public static bool TempRename(string cstCode, string cstId)
+        {
+            bool result = false;
+            try
+            {
+                List<string> pathList = new List<string>();
+                pathList.Add(@"C:\UploadedFile\Customer\BusLic\");
+                pathList.Add(@"C:\UploadedFile\Customer\LegRepReg\");
+                pathList.Add(@"C:\UploadedFile\Customer\TaxReg\");
+                foreach (string folderPath in pathList)
+                {
+                    DirectoryInfo folder = new DirectoryInfo(folderPath);
+                    foreach (FileInfo file in folder.GetFiles(cstCode + "-*.*"))
+                    {
+                        // C:\UploadedFile\Customer\BusLic\021XHD000115-130601434673098343.png
+                        string oldFullName = file.FullName;
+                        string newFullName = oldFullName.Replace(cstCode, cstId);
+                        File.Move(oldFullName, newFullName);
+
+                    }
+                }
+                result = true;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("批量重命名名称时出错：" + e.Message);
+                throw new Exception("批量重命名名称时出错：" + e.Message);
+            }
+            return result;
+        }
+
         public static void EditRenameName(string cstCode)
         {
             try

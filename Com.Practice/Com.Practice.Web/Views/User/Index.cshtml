@@ -16,7 +16,7 @@
     <script src="~/Plugins/easyui/jquery-easyui-1.3.6/locale/easyui-lang-zh_CN.js"></script>
     <!-- ---------自定义的文件-------- -->
     <!-- 自定义页面样式文件 -->
-    <link href="~/CSS/User/index.css" rel="stylesheet" />
+    <link href="~/CSS/dataGrid.css" rel="stylesheet" />
     <!-- 自定义页面js文件 -->
     <script src="~/Scripts/User/index.js"></script>
 </head>
@@ -28,19 +28,22 @@
         @*<table id="dg">
         </table>*@
         <table id="tablelist" class="easyui-datagrid" style="height:504px"  
-        url="GetBooksByPage" toolbar="#toolbar"  
-        title="书籍信息管理"
+        url="GetUsersByPage" toolbar="#toolbar"  
+        title="用户管理" onLoadError="alert('加载数据出错了');"
         rownumbers="true" pagination="true" pagePosition='bottom'> 
             <thead>
                 <tr>
-                    <th data-options="field:'id',width:100,align:'center'"">书号</th>
-                    <th data-options="field:'name',width:100,align:'center'">书名</th>
-                    <th data-options="field:'version',width:100,align:'center'">版本</th>
-                    <th data-options="field:'published_at',width:160,align:'center'">出版时间</th>
-                    <th data-options="field:'created_by',width:100,align:'center'">创建人</th>
-                    <th data-options="field:'created_at',width:200,align:'center'">创建时间</th>
-                    <th data-options="field:'updated_by',width:100,align:'center'">更新人</th>
-                    <th data-options="field:'updated_at',width:200,align:'center'">最后更新时间</th>
+                    <th data-options="field:'id',width:50,align:'center'"">编号</th>
+                    <th data-options="field:'loginName',width:100,align:'center'">登录名</th>
+                    <th data-options="field:'nickName',width:100,align:'center'">昵称</th>
+                    <th data-options="field:'pwd',width:50,align:'center'">密码</th>
+                    <th data-options="field:'email',width:200,align:'center'">绑定邮箱</th>
+                    <th data-options="field:'emailStatus',width:60,align:'center'">邮箱状态</th>
+                    <th data-options="field:'mobilePhone',width:100,align:'center'">绑定手机</th>
+                    <th data-options="field:'mobilePhoneStatus',width:60,align:'center'">手机状态</th>
+                    <th data-options="field:'userStatus',width:60,align:'center'">用户状态</th>
+                    <th data-options="field:'createName',width:100,align:'center'">创建人</th>
+                    <th data-options="field:'updateName',width:100,align:'center'">更新人</th>
                 </tr>
             </thead>
         </table>
@@ -48,50 +51,45 @@
         <div id="toolbar" style="padding:5px">
             <div>
                 <br />
-                <span style="margin-left:5px;">版本:</span>  
-                <input id="version" style="line-height:18px;border:1px solid #95B8E7">
+                <span style="margin-left:5px;">登录名:</span>  
+                <input id="query_login_name" style="line-height:18px;border:1px solid #95B8E7">
                 &nbsp;&nbsp;&nbsp;&nbsp;
-                <span>出版时间:</span>  
-                <input id="published_at_start" class="easyui-datebox" style="border:1px solid #95B8E7">
-                <sapn>-</sapn>
-                <input id="published_at_end" class="easyui-datebox" style="border:1px solid #95B8E7">
-                <br /><br />
-                <span style="margin-left:5px;">书号:</span>  
-                <input id="id" style="line-height:18px; border:1px solid #95B8E7"> 
-                &nbsp;&nbsp;&nbsp;&nbsp; 
-                <span>书&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;名:</span>  
-                <input id="name" style="line-height:18px;border:1px solid #95B8E7">
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <span>昵称:</span>  
+                <input id="nick_name" style="border:1px solid #95B8E7">
+                
                 <a href="javascript:void(0)" class="easyui-linkbutton" iconCls='icon-reload' plain="true" onclick="doClear()">清空</a>
                 &nbsp;&nbsp;&nbsp;&nbsp;
                 <a href="javascript:void(0)" class="easyui-linkbutton" iconCls='icon-search' plain="true" onclick="doSearch()">查询</a>
-                
-                
             </div> 
             <a onclick="add()" href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-add',plain:true">新增</a>
-            <a onclick="edit()" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-edit',plain:true">修改</a>
-            <a onclick="del()" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-remove',plain:true">删除</a>
+            <a onclick="edit()" href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-edit',plain:true">修改</a>
+            <a onclick="del()" href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-remove',plain:true">删除</a>
+            <a onclick="roleConfig()" href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-edit',plain:true">配置角色</a>
+            <a onclick="authConfig()" href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-edit',plain:true">配置权限</a>
             <br/>
         </div>
         @*“新增”弹出窗口*@
-        <div id="addWin" class="easyui-dialog" title="添加书籍信息" style="width:250px;height:300px"   
+        <div id="addWin" class="easyui-dialog" title="添加用户信息" style="width:250px;height:300px"   
             data-options="iconCls:'icon-add',modal:true" closed="true" buttons="#addWinButtons">   
-            <div class="ftitle">书籍信息
+            <div class="ftitle">用户信息
 	        </div>
 	        <form id="addfm" method="post" class="fm">
 		        <div class="fitem">
-			        <label>书籍名称:</label>
-			        <input name="name" class="easyui-validatebox" required="true">
+			        <label>登录名:</label>
+			        <input name="loginName" type="text" class="easyui-validatebox" required="true">
 		        </div>
 		        <div class="fitem">
-			        <label>版本:</label>
-			        <input name="version" class="easyui-validatebox" required="true">
+			        <label>昵称:</label>
+			        <input name="nickName" type="text" class="easyui-validatebox" required="true">
 		        </div>
 		        <div class="fitem">
-			        <label>出版时间：</label>
-                    <input id="published_at" name="published_at" type="text" class="easyui-datebox" required="required">
+			        <label>邮箱地址：</label>
+                    <input name="email" type="text" class="easyui-validatebox" required="true">
 		        </div>
-		        
+		        <div class="fitem">
+			        <label>手机号码：</label>
+                    <input name="mobilePhone" type="text" class="easyui-validatebox" required="true">
+		        </div>
 	        </form>  
         </div> 
         <div id="addWinButtons"> 
@@ -101,23 +99,27 @@
         </div>
 
         @*“修改”弹出窗口*@
-        <div id="editWin" class="easyui-dialog" title="修改书籍信息" style="width:250px;height:300px"   
+        <div id="editWin" class="easyui-dialog" title="修改用户信息" style="width:250px;height:300px"   
             data-options="iconCls:'icon-edit',modal:true" closed="true" buttons="#editWinButtons">   
-            <div class="ftitle">书籍信息
+            <div class="ftitle">用户信息
 	        </div>
 	        <form id="editfm" method="post" class="fm">
 		        <div class="fitem">
-			        <label>书籍名称:</label>
+			        <label>登录名:</label>
                     <input name="id" type="hidden">
-			        <input name="name" class="easyui-validatebox" required="true">
+			        <input name="loginName" class="easyui-validatebox" required="true">
 		        </div>
 		        <div class="fitem">
-			        <label>版本:</label>
-			        <input name="version" class="easyui-validatebox" required="true">
+			        <label>昵称:</label>
+			        <input name="nickName" class="easyui-validatebox" required="true">
 		        </div>
 		        <div class="fitem">
-			        <label>出版时间：</label>
-                    <input name="published_at" type="text" class="easyui-datebox" required="required">
+			        <label>邮箱地址：</label>
+                    <input name="email" type="text" class="easyui-validatebox" required="true">
+		        </div>
+		        <div class="fitem">
+			        <label>手机号码：</label>
+                    <input name="mobilePhone" type="text" class="easyui-validatebox" required="true">
 		        </div>
 		        
 	        </form>  
@@ -126,6 +128,33 @@
             <a href="javascript:void(0)" class="easyui-linkbutton" onclick="update()" iconcls="icon-save">保存</a> 
             <a href="javascript:void(0)" class="easyui-linkbutton" onclick="javascript:$('#editWin').dialog('close')"
             iconcls="icon-cancel">取消</a> 
+        </div>
+
+        @*“配置角色”弹出窗口*@
+        <div id="roleConfigWin" class="easyui-dialog" title="用户拥有的角色" style="width:200px;height:400px"   
+            data-options="iconCls:'icon-edit',modal:true" closed="true" buttons="#roleConfigWinWinButtons">   
+            <div class="ftitle">用户角色信息
+	        </div>
+	        <ul id="roleConfigTree" class="easyui-tree"></ul>
+        </div> 
+        <div id="roleConfigWinWinButtons"> 
+            <a href="javascript:void(0)" class="easyui-linkbutton" onclick="saveRoleConfig()" iconcls="icon-save">保存</a>
+            <a href="javascript:void(0)" class="easyui-linkbutton" onclick="javascript:$('#roleConfigWin').dialog('close')"
+            iconcls="icon-cancel">取消</a> 
+        </div>
+        
+
+        @*“配置权限”弹出窗口*@
+        <div id="authConfigWin" class="easyui-dialog" title="查看用户权限" style="width:200px;height:400px"   
+            data-options="iconCls:'icon-edit',modal:true" closed="true" buttons="#authConfigWinButtons">   
+            <div class="ftitle">用户权限信息
+	        </div>
+            <div id="authLoginName"></div>
+	        <ul id="tt" class="easyui-tree"></ul>
+        </div> 
+        <div id="authConfigWinButtons"> 
+            <a href="javascript:void(0)" class="easyui-linkbutton" onclick="javascript:$('#authConfigWin').dialog('close')"
+            iconcls="icon-cancel">确定</a> 
         </div>
     </div>
 </body>

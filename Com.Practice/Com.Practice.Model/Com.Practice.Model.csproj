@@ -52,7 +52,7 @@
   <ItemGroup>
     <Compile Include="BookModel.cs" />
     <Compile Include="Common\TreeAttributes.cs" />
-    <Compile Include="Common\TreeModel.cs" />
+    <Compile Include="Common\NoCheckTreeModel.cs" />
     <Compile Include="Common\OnlineUserInfoModel.cs" />
     <Compile Include="Common\PaginationModel.cs" />
     <Compile Include="FunctionModel.cs" />
@@ -63,6 +63,7 @@
     <Compile Include="RoleModel.cs" />
     <Compile Include="RoleMenuModel.cs" />
     <Compile Include="UserModel.cs" />
+    <Compile Include="UserQueryModel.cs" />
     <Compile Include="UserRoleModel.cs" />
   </ItemGroup>
   <ItemGroup />

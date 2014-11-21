@@ -34,8 +34,7 @@
             <thead>
                 <tr>
                     <th data-options="field:'id',width:50,align:'center'">编号</th>
-                    <th data-options="field:'function_code',width:100,align:'center'" >功能编码</th>
-                    <th data-options="field:'function_name',width:100,align:'center'">功能名称</th>
+                    <th data-options="field:'name',width:100,align:'center'">功能名称</th>
                     <th data-options="field:'created_by_name',width:80,align:'center'">创建人</th>
                     <th data-options="field:'created_at',width:180,align:'center',sortable:true">创建时间</th>
                     <th data-options="field:'updated_by_name',width:80,align:'center'">更新人</th>
@@ -51,11 +50,8 @@
                 <input id="query_id" style="line-height:18px;border:1px solid #95B8E7">
                 &nbsp;&nbsp;&nbsp;&nbsp;
                 
-                <span style="margin-left:5px;">功能编码:</span>  
-                <input id="query_function_code" style="line-height:18px; border:1px solid #95B8E7"> 
-                &nbsp;&nbsp;&nbsp;&nbsp; 
                 <span>功能名称:</span>  
-                <input id="query_function_name" style="line-height:18px;border:1px solid #95B8E7">
+                <input id="query_name" style="line-height:18px;border:1px solid #95B8E7">
                 
                 <br/>
                 <span style="margin-left:5px;">创建时间:</span> 
@@ -80,13 +76,10 @@
             <div class="ftitle">功能信息
 	        </div>
 	        <form id="addfm" method="post" class="fm">
-		        <div class="fitem">
-			        <label>功能编码:</label>
-			        <input name="function_code" class="easyui-validatebox" required="true" style="text-transform:uppercase">
-		        </div>
+		        
 		        <div class="fitem">
 			        <label>功能名称:</label>
-			        <input name="function_name" class="easyui-validatebox" required="true">
+			        <input name="name" class="easyui-validatebox" required="true">
 		        </div>
 	        </form>  
         </div> 
@@ -102,14 +95,10 @@
             <div class="ftitle">功能信息
 	        </div>
 	        <form id="editfm" method="post" class="fm">
-		        <div class="fitem">
-			        <label>功能编码:</label>
-                    <input name="id" type="hidden">
-			        <input name="function_code" type="text" required="true">
-		        </div>
+		        
 		        <div class="fitem">
 			        <label>功能名称:</label>
-			        <input name="function_name" type="text" required="true">
+			        <input name="name" type="text" required="true">
 		        </div>
 		        
 		        

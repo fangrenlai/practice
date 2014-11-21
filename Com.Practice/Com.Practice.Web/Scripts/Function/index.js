@@ -10,8 +10,7 @@ function formatterDate(date) {
 // “清空”查询条件
 function doClear() {
     $('#query_id').val('');
-    $('#query_function_code').val('');
-    $('#query_function_name').val('');
+    $('#query_name').val('');
     $('#query_created_at_start').datetimebox('setValue', '');
     $('#query_created_at_end').datetimebox('setValue', '');
 }
@@ -20,8 +19,7 @@ function doSearch() {
     //alert("查询");
     $('#tablelist').datagrid('reload', {
         query_id: $('#query_id').val().trim(),
-        query_function_code: $('#query_function_code').val().trim(),
-        query_function_name: $('#query_function_name').val().trim(),
+        query_name: $('#query_name').val().trim(),
         query_created_at_start: $('#query_created_at_start').datetimebox('getValue').trim(),
         query_created_at_end: $('#query_created_at_end').datetimebox('getValue').trim()
     });

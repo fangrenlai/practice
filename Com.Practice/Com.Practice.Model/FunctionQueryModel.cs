@@ -19,14 +19,6 @@ namespace Com.Practice.Model
             set { queryId = value; }
         }
 
-        private string queryCode;
-
-        public string QueryCode
-        {
-            get { return queryCode; }
-            set { queryCode = value; }
-        }
-
         private string queryName;
 
         public string QueryName

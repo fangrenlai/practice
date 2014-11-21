@@ -11,12 +11,11 @@ namespace Com.Practice.Model
 		{}
         #region Model
         private int _id;
-        private string _function_code;
-        private string _function_name;
-        private int? _created_by_id;
+        private string _name;
+        private int? _created_by;
         private string _created_by_name;
         private DateTime? _created_at;
-        private int? _updated_by_id;
+        private int? _updated_by;
         private string _updated_by_name;
         private DateTime? _updated_at;
         /// <summary>
@@ -27,29 +26,22 @@ namespace Com.Practice.Model
             set { _id = value; }
             get { return _id; }
         }
+       
         /// <summary>
         /// 
         /// </summary>
-        public string function_code
+        public string name
         {
-            set { _function_code = value; }
-            get { return _function_code; }
+            set { _name = value; }
+            get { return _name; }
         }
         /// <summary>
         /// 
         /// </summary>
-        public string function_name
+        public int? created_by
         {
-            set { _function_name = value; }
-            get { return _function_name; }
-        }
-        /// <summary>
-        /// 
-        /// </summary>
-        public int? created_by_id
-        {
-            set { _created_by_id = value; }
-            get { return _created_by_id; }
+            set { _created_by = value; }
+            get { return _created_by; }
         }
         /// <summary>
         /// 
@@ -70,10 +62,10 @@ namespace Com.Practice.Model
         /// <summary>
         /// 
         /// </summary>
-        public int? updated_by_id
+        public int? updated_by
         {
-            set { _updated_by_id = value; }
-            get { return _updated_by_id; }
+            set { _updated_by = value; }
+            get { return _updated_by; }
         }
         /// <summary>
         /// 

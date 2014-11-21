@@ -42,8 +42,7 @@ namespace Com.Practice.Web.Controllers
             PaginationModel paginationModel = null;
             FunctionQueryModel functionQueryModel = null;
             string query_id = "";
-            string query_function_code = "";
-            string query_function_name = "";
+            string query_name = "";
             string query_created_at_start = "";
             string query_created_at_end = "";
             try
@@ -56,8 +55,7 @@ namespace Com.Practice.Web.Controllers
                 // 接收查询条件
                 query_id = null == Request["query_id"] ? "" : Request["query_id"].ToString();
                 //query_id = null == Request["query_id"] ? 0 : Convert.ToInt32(Request["query_id"].ToString());
-                query_function_code = null == Request["query_function_code"] ? "" : Request["query_function_code"].ToString();
-                query_function_name = null == Request["query_function_name"] ? "" : Request["query_function_name"].ToString();
+                query_name = null == Request["query_name"] ? "" : Request["query_name"].ToString();
                 query_created_at_start = null == Request["query_created_at_start"] ? "" : Request["query_created_at_start"].ToString();
                 query_created_at_end = null == Request["query_created_at_end"] ? "" : Request["query_created_at_end"].ToString();
                 paginationModel = new PaginationModel(page, rows, sort, order);
@@ -71,8 +69,7 @@ namespace Com.Practice.Web.Controllers
                     functionQueryModel.QueryId = Convert.ToInt32(query_id);
                 }
 
-                functionQueryModel.QueryCode = query_function_code;
-                functionQueryModel.QueryName = query_function_name;
+                functionQueryModel.QueryName = query_name;
                 functionQueryModel.QueryCreateStartTime = query_created_at_start;
                 functionQueryModel.QueryCreateEndTime = query_created_at_end;
 
@@ -93,9 +90,8 @@ namespace Com.Practice.Web.Controllers
         /// <returns></returns>
         public ActionResult AddFunction()
         {
-            string functionCode = null == Request["function_code"] ? "" : Request["function_code"].ToString();
-            string functionName = null == Request["function_name"] ? "" : Request["function_name"].ToString();
-            if (string.IsNullOrEmpty(functionCode) || string.IsNullOrEmpty(functionName))
+            string functionName = null == Request["name"] ? "" : Request["name"].ToString();
+            if (string.IsNullOrEmpty(functionName))
             {
                 return Json(new { result = -1, msg = "出错了，错误代码/信息为：表单数据不符合要求" });
             }
@@ -112,13 +108,12 @@ namespace Com.Practice.Web.Controllers
                     onlineUserInfoModel = new OnlineUserInfoModel();
                     onlineUserInfoModel = (OnlineUserInfoModel)JsonUtils.JsonToObject(onlineUserInfoString, onlineUserInfoModel);
                     FunctionModel addModel = new FunctionModel();
-                    addModel.function_code = functionCode;
-                    addModel.function_name = functionName;
+                    addModel.name = functionName;
                     addModel.created_at = DateTime.Now;
-                    addModel.created_by_id = onlineUserInfoModel.UserModel.id;
+                    addModel.created_by = onlineUserInfoModel.UserModel.id;
                     addModel.created_by_name = onlineUserInfoModel.UserModel.login_name;
                     addModel.updated_at = DateTime.Now;
-                    addModel.updated_by_id = onlineUserInfoModel.UserModel.id;
+                    addModel.updated_by = onlineUserInfoModel.UserModel.id;
                     addModel.updated_by_name = onlineUserInfoModel.UserModel.login_name;
                     FunctionBLL functionBLL = null;
                     try
@@ -155,9 +150,8 @@ namespace Com.Practice.Web.Controllers
             {
                 id = Convert.ToInt32(idStr);
             }
-            string functionCode = null == Request["function_code"] ? "" : Request["function_code"].ToString();
-            string functionName = null == Request["function_name"] ? "" : Request["function_name"].ToString();
-            if (string.IsNullOrEmpty(functionCode) || string.IsNullOrEmpty(functionName) || (0 == id))
+            string functionName = null == Request["name"] ? "" : Request["name"].ToString();
+            if (string.IsNullOrEmpty(functionName) || (0 == id))
             {
                 return Json(new { result = -1, msg = "出错了，错误代码/信息为：表单数据不符合要求" });
             }
@@ -187,14 +181,13 @@ namespace Com.Practice.Web.Controllers
                         {
                             FunctionModel updateModel = new FunctionModel();
                             updateModel.id = id;
-                            updateModel.function_code = functionCode;
-                            updateModel.function_name = functionName;
+                            updateModel.name = functionName;
                             updateModel.updated_at = DateTime.Now;
-                            updateModel.updated_by_id = onlineUserInfoModel.UserModel.id;
+                            updateModel.updated_by = onlineUserInfoModel.UserModel.id;
                             updateModel.updated_by_name = onlineUserInfoModel.UserModel.login_name;
                             // 没有改动的部分要用老数据填充
                             updateModel.created_at = oldModel.created_at;
-                            updateModel.created_by_id = oldModel.created_by_id;
+                            updateModel.created_by = oldModel.created_by;
                             updateModel.created_by_name = oldModel.created_by_name;
                             bool addResult = functionBLL.UpdateFunction(updateModel);
                             if (addResult)

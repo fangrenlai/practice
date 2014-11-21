@@ -46,24 +46,22 @@ namespace Com.Practice.DAL
         {
             StringBuilder strSql = new StringBuilder();
             strSql.Append("insert into p_function(");
-            strSql.Append("function_code,function_name,created_by_id,created_by_name,created_at,updated_by_id,updated_by_name,updated_at)");
+            strSql.Append("name,created_by,created_by_name,created_at,updated_by,updated_by_name,updated_at)");
             strSql.Append(" values (");
-            strSql.Append("@function_code,@function_name,@created_by_id,@created_by_name,@created_at,@updated_by_id,@updated_by_name,@updated_at)");
+            strSql.Append("@name,@created_by,@created_by_name,@created_at,@updated_by,@updated_by_name,@updated_at)");
             MySqlParameter[] parameters = {
-					new MySqlParameter("@function_code", MySqlDbType.VarChar,22),
-					new MySqlParameter("@function_name", MySqlDbType.VarChar,22),
-					new MySqlParameter("@created_by_id", MySqlDbType.Int32,11),
+					new MySqlParameter("@name", MySqlDbType.VarChar,22),
+					new MySqlParameter("@created_by", MySqlDbType.Int32,11),
 					new MySqlParameter("@created_by_name", MySqlDbType.VarChar,22),
 					new MySqlParameter("@created_at", MySqlDbType.DateTime),
-					new MySqlParameter("@updated_by_id", MySqlDbType.Int32,11),
+					new MySqlParameter("@updated_by", MySqlDbType.Int32,11),
 					new MySqlParameter("@updated_by_name", MySqlDbType.VarChar,22),
 					new MySqlParameter("@updated_at", MySqlDbType.DateTime)};
-            parameters[0].Value = model.function_code;
-            parameters[1].Value = model.function_name;
-            parameters[2].Value = model.created_by_id;
+            parameters[1].Value = model.name;
+            parameters[2].Value = model.created_by;
             parameters[3].Value = model.created_by_name;
             parameters[4].Value = model.created_at;
-            parameters[5].Value = model.updated_by_id;
+            parameters[5].Value = model.updated_by;
             parameters[6].Value = model.updated_by_name;
             parameters[7].Value = model.updated_at;
 
@@ -84,31 +82,28 @@ namespace Com.Practice.DAL
         {
             StringBuilder strSql = new StringBuilder();
             strSql.Append("update p_function set ");
-            strSql.Append("function_code=@function_code,");
-            strSql.Append("function_name=@function_name,");
-            strSql.Append("created_by_id=@created_by_id,");
+            strSql.Append("name=@name,");
+            strSql.Append("created_by=@created_by,");
             strSql.Append("created_by_name=@created_by_name,");
             strSql.Append("created_at=@created_at,");
-            strSql.Append("updated_by_id=@updated_by_id,");
+            strSql.Append("updated_by=@updated_by,");
             strSql.Append("updated_by_name=@updated_by_name,");
             strSql.Append("updated_at=@updated_at");
             strSql.Append(" where id=@id");
             MySqlParameter[] parameters = {
-					new MySqlParameter("@function_code", MySqlDbType.VarChar,22),
-					new MySqlParameter("@function_name", MySqlDbType.VarChar,22),
-					new MySqlParameter("@created_by_id", MySqlDbType.Int32,11),
+					new MySqlParameter("@name", MySqlDbType.VarChar,22),
+					new MySqlParameter("@created_by", MySqlDbType.Int32,11),
 					new MySqlParameter("@created_by_name", MySqlDbType.VarChar,22),
 					new MySqlParameter("@created_at", MySqlDbType.DateTime),
-					new MySqlParameter("@updated_by_id", MySqlDbType.Int32,11),
+					new MySqlParameter("@updated_by", MySqlDbType.Int32,11),
 					new MySqlParameter("@updated_by_name", MySqlDbType.VarChar,22),
 					new MySqlParameter("@updated_at", MySqlDbType.DateTime),
 					new MySqlParameter("@id", MySqlDbType.Int32,11)};
-            parameters[0].Value = model.function_code;
-            parameters[1].Value = model.function_name;
-            parameters[2].Value = model.created_by_id;
+            parameters[1].Value = model.name;
+            parameters[2].Value = model.created_by;
             parameters[3].Value = model.created_by_name;
             parameters[4].Value = model.created_at;
-            parameters[5].Value = model.updated_by_id;
+            parameters[5].Value = model.updated_by;
             parameters[6].Value = model.updated_by_name;
             parameters[7].Value = model.updated_at;
             parameters[8].Value = model.id;
@@ -175,7 +170,7 @@ namespace Com.Practice.DAL
         {
 
             StringBuilder strSql = new StringBuilder();
-            strSql.Append("select id,function_code,function_name,created_by_id,created_by_name,created_at,updated_by_id,updated_by_name,updated_at from p_function ");
+            strSql.Append("select id,name,created_by,created_by_name,created_at,updated_by,updated_by_name,updated_at from p_function ");
             strSql.Append(" where id=@id");
             MySqlParameter[] parameters = {
 					new MySqlParameter("@id", MySqlDbType.Int32)
@@ -207,17 +202,14 @@ namespace Com.Practice.DAL
                 {
                     model.id = int.Parse(row["id"].ToString());
                 }
-                if (row["function_code"] != null)
+               
+                if (row["name"] != null)
                 {
-                    model.function_code = row["function_code"].ToString();
+                    model.name = row["name"].ToString();
                 }
-                if (row["function_name"] != null)
+                if (row["created_by"] != null && row["created_by"].ToString() != "")
                 {
-                    model.function_name = row["function_name"].ToString();
-                }
-                if (row["created_by_id"] != null && row["created_by_id"].ToString() != "")
-                {
-                    model.created_by_id = int.Parse(row["created_by_id"].ToString());
+                    model.created_by = int.Parse(row["created_by"].ToString());
                 }
                 if (row["created_by_name"] != null)
                 {
@@ -227,9 +219,9 @@ namespace Com.Practice.DAL
                 {
                     model.created_at = DateTime.Parse(row["created_at"].ToString());
                 }
-                if (row["updated_by_id"] != null && row["updated_by_id"].ToString() != "")
+                if (row["updated_by"] != null && row["updated_by"].ToString() != "")
                 {
-                    model.updated_by_id = int.Parse(row["updated_by_id"].ToString());
+                    model.updated_by = int.Parse(row["updated_by"].ToString());
                 }
                 if (row["updated_by_name"] != null)
                 {
@@ -249,7 +241,7 @@ namespace Com.Practice.DAL
         public DataSet GetList(string strWhere)
         {
             StringBuilder strSql = new StringBuilder();
-            strSql.Append("select id,function_code,function_name,created_by_id,created_by_name,created_at,updated_by_id,updated_by_name,updated_at ");
+            strSql.Append("select id,name,created_by,created_by_name,created_at,updated_by,updated_by_name,updated_at ");
             strSql.Append(" FROM p_function ");
             if (strWhere.Trim() != "")
             {

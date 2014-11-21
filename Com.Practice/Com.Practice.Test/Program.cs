@@ -39,8 +39,15 @@ namespace Com.Practice.Test
             //    Console.WriteLine(e.Message);
             //}
             //Console.WriteLine(i);
-            
-            //FilesUtilsTest.EditRenameName("010XHZ000115");
+
+            if (FilesUtilsTest.TempRename("010XHZ000115", "1144"))
+            {
+                Console.WriteLine("succeed");
+            }
+            else 
+            {
+                Console.WriteLine("failed");
+            }
 
 
 

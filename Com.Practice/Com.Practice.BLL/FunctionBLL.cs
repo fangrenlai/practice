@@ -23,7 +23,7 @@ namespace Com.Practice.BLL
         /// <returns></returns>
         public string GetSpecificDataJsonStr(PaginationModel paginationModel, FunctionQueryModel functionQueryModel)
         {
-            string result = null;
+            string result = "";
             if (null == paginationModel || null == functionQueryModel)
             {
                 throw new Exception("查询条件实体类为null");
@@ -38,19 +38,16 @@ namespace Com.Practice.BLL
                 {
                     int startIndex = (paginationModel.Page - 1) * paginationModel.Rows;
 
-                    string dataSQL = @"SELECT id, function_code,function_name,created_by_id,created_by_name,updated_by_id,updated_by_name,DATE_FORMAT(created_at,'%Y-%m-%d %T') as created_at,DATE_FORMAT(updated_at,'%Y-%m-%d %T') as updated_at FROM p_function ";
+                    string dataSQL = @"SELECT id,name,created_by,created_by_name,updated_by,updated_by_name,DATE_FORMAT(created_at,'%Y-%m-%d %T') as created_at,DATE_FORMAT(updated_at,'%Y-%m-%d %T') as updated_at FROM p_function ";
                     string conditionSQL = "where 1=1 ";
                     if (0 != functionQueryModel.QueryId)
                     {
                         conditionSQL += string.Format("and id = '{0}' ", functionQueryModel.QueryId);
                     }
-                    if (!string.IsNullOrEmpty(functionQueryModel.QueryCode))
-                    {
-                        conditionSQL += string.Format("and function_code like '%{0}%' ", functionQueryModel.QueryCode);
-                    }
+                  
                     if (!string.IsNullOrEmpty(functionQueryModel.QueryName))
                     {
-                        conditionSQL += string.Format("and function_name like '%{0}%' ", functionQueryModel.QueryName);
+                        conditionSQL += string.Format("and name like '%{0}%' ", functionQueryModel.QueryName);
                     }
                     if ((!string.IsNullOrEmpty(functionQueryModel.QueryCreateStartTime)) && string.IsNullOrEmpty(functionQueryModel.QueryCreateEndTime))
                     {
