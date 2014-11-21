@@ -1,0 +1,101 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+    <!-- easyui样式文件 -->
+    <link href="~/Plugins/easyui/jquery-easyui-1.3.6/themes/default/easyui.css" rel="stylesheet" />
+    <!-- easyui图标样式文件 -->
+    <link href="~/Plugins/easyui/jquery-easyui-1.3.6/themes/icon.css" rel="stylesheet" />
+    <!-- jquery主文件 ,借用easyui内置jquery文件，mini版本 -->
+    <script src="~/Plugins/easyui/jquery-easyui-1.3.6/jquery.min.js"></script>
+    <!-- easyui主文件，mini版本 -->
+    <script src="~/Plugins/easyui/jquery-easyui-1.3.6/jquery.easyui.min.js"></script>
+    <!-- easyui中文化js文件 -->
+    <script src="~/Plugins/easyui/jquery-easyui-1.3.6/locale/easyui-lang-zh_CN.js"></script>
+    <!-- ---------自定义的文件-------- -->
+    <!-- 自定义页面样式文件 -->
+    <link href="~/CSS/dataGrid.css" rel="stylesheet" />
+    <!-- 自定义页面js文件 -->
+    <script src="~/Scripts/Role/index.js"></script>
+</head>
+
+<body class="easyui-layout">
+
+    <div id="mainPanle" class="centerDiv" data-options="region:'center'">
+        @*js方式*@
+        @*<table id="dg">
+        </table>*@
+        <table id="tablelist" class="easyui-datagrid" style="height:504px"  
+        url="GetSpecificRolesByPage" onLoadError="alert('加载数据出错了');" toolbar="#toolbar"  method="get"
+        title="角色管理"
+        rownumbers="true" pagination="true" pagePosition='bottom'> 
+            <thead>
+                <tr>
+                    <th data-options="field:'id',width:50,align:'center'">编号</th>
+                    <th data-options="field:'name',width:100,align:'center'">功能名称</th>
+                    <th data-options="field:'created_by_name',width:80,align:'center'">创建人</th>
+                    <th data-options="field:'created_at',width:180,align:'center'">创建时间</th>
+                    <th data-options="field:'updated_by_name',width:80,align:'center'">更新人</th>
+                    <th data-options="field:'updated_at',width:180,align:'center'">最后更新时间</th>
+                </tr>
+            </thead>
+        </table>
+        @*自定义工具栏*@
+        <div id="toolbar" style="padding:5px">
+            <div>
+                <br />
+                <span>角色名称:</span>  
+                <input id="query_name" style="line-height:18px;border:1px solid #95B8E7">
+                <a href="javascript:void(0)" class="easyui-linkbutton" iconCls='icon-reload' plain="true" onclick="doClear()">清空</a>
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <a href="javascript:void(0)" class="easyui-linkbutton" iconCls='icon-search' plain="true" onclick="doSearch()">查询</a>
+            </div> 
+            <a onclick="add()" href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-add',plain:true">新增</a>
+            <a onclick="edit()" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-edit',plain:true">修改</a>
+            <a onclick="del()" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-remove',plain:true">删除</a>
+            <br/>
+        </div>
+        @*“新增”弹出窗口*@
+        <div id="addWin" class="easyui-dialog" title="添加角色" style="width:250px;height:300px"   
+            data-options="iconCls:'icon-add',modal:true" closed="true" buttons="#addWinButtons">   
+            <div class="ftitle">角色信息
+	        </div>
+	        <form id="addfm" method="post" class="fm">
+		        
+		        <div class="fitem">
+			        <label>角色名称:</label>
+			        <input name="name" class="easyui-validatebox" required="true">
+		        </div>
+	        </form>  
+        </div> 
+        <div id="addWinButtons"> 
+            <a href="javascript:void(0)" class="easyui-linkbutton" onclick="save()" iconcls="icon-save">保存</a> 
+            <a href="javascript:void(0)" class="easyui-linkbutton" onclick="javascript:$('#addWin').dialog('close')"
+            iconcls="icon-cancel">取消</a> 
+        </div>
+
+        @*“修改”弹出窗口*@
+        <div id="editWin" class="easyui-dialog" title="修改角色信息" style="width:250px;height:300px"   
+            data-options="iconCls:'icon-edit',modal:true" closed="true" buttons="#editWinButtons">   
+            <div class="ftitle">角色信息
+	        </div>
+	        <form id="editfm" method="post" class="fm">
+		        
+		        <div class="fitem">
+			        <label>角色名称:</label>
+			        <input name="name" type="text" class="easyui-validatebox" required="true">
+		        </div>
+		        
+		        
+	        </form>  
+        </div> 
+        <div id="editWinButtons"> 
+            <a href="javascript:void(0)" class="easyui-linkbutton" onclick="update()" iconcls="icon-save">保存</a> 
+            <a href="javascript:void(0)" class="easyui-linkbutton" onclick="javascript:$('#editWin').dialog('close')"
+            iconcls="icon-cancel">取消</a> 
+        </div>
+    </div>
+</body>
+    </html>
